@@ -2,19 +2,17 @@
 <html>
 
 <head>
-<style>
-    #canvas {
-        border-style: double;
-    }
-
-
-</style>
+    <style>
+        #canvas {
+            border-style: double;
+        }
+    </style>
 
 
 </head>
 
 <body>
-    <canvas id="canvas" width="800" height="600">
+    <canvas id="canvas" width="1000" height="600">
     </canvas>
 
 
@@ -27,32 +25,40 @@
 <script>
     var canvas = document.getElementById("canvas")
     var ctx = canvas.getContext("2d")
-    var x = 100
-    var y = 100
-    var speedX = 5
-    var speedY = 5
-    ctx.fillStyle = "#2b00ff"
-    setInterval( movement, 25)
-    function movement() {
-        ctx.clearRect(0,0,1000,1000)
-        x = x + speedX
-        y = y + speedY
-        ctx.beginPath()
-        ctx.arc(x,y,30,0, 2*Math.PI)
-        ctx.fill()
-        ctx.stroke()
-        if(x >= canvas.width-30){
-            speedX = -speedX
-        } if(y >= canvas.height-30){
-            speedY = -speedY
-        } if(x <= 30){
-            speedX = -speedX
-        } if(y <= 30){
-            speedY = -speedY
-        }
-
-
-
+    var color = ['blue', 'red', 'purple']
+   // var x = [100, 200, 767, 246, 528, 479]
+  //  var y = [100, 45, 476, 557, 235, 498]
+   // var speedX = [,3,6,3,7,8,3]
+    //var speedY = [,5,2,6,8,3,2]
+    var x = []
+    var y = []
+    var speedX = []
+    var speedY = []
+    for(i=0; i<6; i++){
+        x.push(Math.random()*100)
     }
+    ctx.fillStyle = "#2b00ff"
+    setInterval(movement, 25)
+    function movement() {
+        ctx.clearRect(0, 0, 1000, 1000)
+        for (i = 0; i < 6; i++) {
+            ctx.beginPath()
+            ctx.arc(x[i], y[i], 30, 0, 2 * Math.PI)
+            ctx.fill()
+            x[i] = x[i] + speedX[i]
+            y[i] = y[i] + speedY[i]
+            if (x[i] >= canvas.width - 30) {
+                speedX[i] = -speedX[i]
+            } if (y[i] >= canvas.height - 30) {
+                speedY[i] = -speedY[i]
+            } if (x[i] <= 30) {
+
+                speedX[i] = -speedX[i]
+            } if (y[i] <= 30) {
+                speedY[i] = -speedY[i]
+            }
+        }
+    }
+
 
 </script>
