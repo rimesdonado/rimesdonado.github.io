@@ -34,8 +34,6 @@
     var y = []
     var speedX = []
     var speedY = []
-    var mouseX = MouseEvent.clientX
-    var mouseY = MouseEvent.ClientY
     for (i = 0; i < 1; i++) {
         x.push(Math.random() * 300)
         y.push(Math.random() * 600)
@@ -45,13 +43,13 @@
     canvas.addEventListener("click", mouseClick)
     ctx.fillStyle = "#2b00ff"
     setInterval(movement, 25)
-    function mouseClick() {
-        x.push(Math.random() * 200)
-        y.push(Math.random() * 600)
+    function mouseClick(event) {
+        var mouseX = event.clientX
+        var mouseY = event.clientY
+        x.push(mouseX)
+        y.push(mouseY)
         speedX.push(Math.random() * 10)
         speedY.push(Math.random() * 10)
-
-
     }
     function movement() {
         ctx.clearRect(0, 0, 1000, 1000)
