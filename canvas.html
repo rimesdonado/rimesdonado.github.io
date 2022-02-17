@@ -54,6 +54,14 @@
     function movement() {
         ctx.clearRect(0, 0, 1000, 1000)
         for (i = 0; i < x.length; i++) {
+            for (j = 1; j < x.length; j++) {
+                if (i !== j) {
+                    if (x[i] === x[j]) {
+                        speedX[j] = -speedX[j]
+                        speedY[j] = -speedY[j]
+                    }
+                }
+            }
             ctx.beginPath()
             ctx.arc(x[i], y[i], 30, 0, 2 * Math.PI)
             ctx.fill()
