@@ -56,9 +56,12 @@
         for (i = 0; i < x.length; i++) {
             for (j = 1; j < x.length; j++) {
                 if (i !== j) {
-                    if (x[i] === x[j]) {
-                        speedX[j] = -speedX[j]
-                        speedY[j] = -speedY[j]
+                    var a = x[i] - x[j]
+                    var b = y[i] - y[j]
+                    var dist = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
+                    if (dist <= 60) {
+                        speedX[i] = speedX[j]
+                        speedY[i] = speedY[j]
                     }
                 }
             }
