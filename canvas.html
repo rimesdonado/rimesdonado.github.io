@@ -58,10 +58,14 @@
                 if (i !== j) {
                     var a = x[i] - x[j]
                     var b = y[i] - y[j]
-                    var dist = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
+                    var dist = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2))
                     if (dist <= 60) {
+                        var tx = speedX[i]
+                        var ty = speedY[i]
                         speedX[i] = speedX[j]
                         speedY[i] = speedY[j]
+                        speedX[j] = tx
+                        speedY[j] = ty
                     }
                 }
             }
