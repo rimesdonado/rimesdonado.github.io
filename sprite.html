@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
-        #dancin{
+        #dancin {
             display: none;
         }
-
-
     </style>
 </head>
+
 <body>
     <canvas id="canvas" width="1000" height="600"> </canvas>
-<img id="dancin" src = "dancin lil dude.png">
+    <img id="dancin" src="KOIRBY.png">
 
 </body>
+
 </html>
 <script>
     var canvas = document.getElementById("canvas")
     var ctx = canvas.getContext("2d")
-    window.onload = function (){
-    var image = document.getElementById("dancin")
-    ctx.drawImage(image,0,0,31,31,31,31,100,100)
+    var sy = 0
+    var kirbProg = 0
+    var img = document.getElementById("dancin")
+    window.onload = function () {
+        setInterval(draw, 250)
+        function draw() {
+            if (sy === 0) {
+                sy = 100
+            } else {
+                sy = 0
+            }
+
+            ctx.clearRect(0, 0, 2000, 2000)
+            ctx.drawImage(img, 0, sy, 100, 100, 100, 100, 100, 100)
+        }
+        document.addEventListener("keyup", keydown)
     }
+    function keydown(e) {
+        if (e.key === "d") {
+            kirbProg = kirbProg + 25
+            img.style.left = Math.round(kirbProg) + "px"
+        } if (e.key === "a") {
+            kirbProg = kirbProg + 25
+            img.style.right = Math.round(kirbProg) + "px"
+        }
+
+
+    }
+
 </script>
