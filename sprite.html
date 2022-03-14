@@ -11,7 +11,7 @@
 
 <body>
     <canvas id="canvas" width="1000" height="600"> </canvas>
-    <img id="dancin" src="god.png">
+    <img id="dancin" src="pokemon balling balling balling pokemon pocket monsters.png">
 
 </body>
 
@@ -19,31 +19,33 @@
 <script>
     var canvas = document.getElementById("canvas")
     var ctx = canvas.getContext("2d")
-    var sx = [0, 100, 0, 100]
-    var sy = [0, 0, 100, 100]
+    var sx = [25, 90, 155, 90]
+    var sy = [400,400,400,400]
+    var posX = 100  
+    var posY = 100
     var spriteIndex = 0
     var kirbProg = 0
     var img = document.getElementById("dancin")
     window.onload = function () {
-        setInterval(draw, 50)
+        setInterval(draw, 150)
         function draw() {
             ctx.clearRect(0, 0, 2000, 2000)
-            ctx.drawImage(img, sx[spriteIndex], sy[spriteIndex], 100, 100, 100, 100, 100, 100)
+            ctx.drawImage(img, sx[spriteIndex], sy[spriteIndex], 73, 73, posX, posY, 100, 100)
             spriteIndex = spriteIndex +1
-            if(spriteIndex > 4){
+            if(spriteIndex > 3){
                 spriteIndex = 0
             }
 
 
         }
-        document.addEventListener("keyup", keydown)
-        function keydown(e) {
+        document.addEventListener("keydown", keyPress)
+        function keyPress(e) {
             if (e.key === "d") {
                 kirbProg = kirbProg + 25
-                img.style.left = Math.round(kirbProg) + px
+                dancin.style.left = Math.round(kirbProg) + px
             } if (e.key === "a") {
                 kirbProg = kirbProg + 25
-                img.style.right = Math.round(kirbProg) +px
+                .style.right = Math.round(kirbProg) +px
             }
 
 
