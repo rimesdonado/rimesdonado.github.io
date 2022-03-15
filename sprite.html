@@ -20,34 +20,75 @@
     var canvas = document.getElementById("canvas")
     var ctx = canvas.getContext("2d")
     var sx = [25, 90, 155, 90]
-    var sy = [400,400,400,400]
-    var posX = 100  
+    var sy = [400, 400, 400, 400]
+    var posX = 100
     var posY = 100
+    var speedX = 0
+    var speedY = 0
+    var ovrSpeed = 1.5
+    var pressW = false
+    var pressA = false
+    var pressS = false
+    var pressD = false
     var spriteIndex = 0
     var kirbProg = 0
+    var charCords = {
+        walkX: [25, 90, 155, 90],
+        walkY: [400, 400, 400, 400],
+    }
     var img = document.getElementById("dancin")
     window.onload = function () {
         setInterval(draw, 150)
-        function draw() {
-            ctx.clearRect(0, 0, 2000, 2000)
-            ctx.drawImage(img, sx[spriteIndex], sy[spriteIndex], 73, 73, posX, posY, 100, 100)
-            spriteIndex = spriteIndex +1
-            if(spriteIndex > 3){
-                spriteIndex = 0
+        setInterval(movement ,0,5)
+     }
+        function movement(){
+            if(pressW){
+                speedY = speedY - ovrSpeed
+            }if(pressS){
+                speedY = speedY + ovrSpeed
+            }if(pressA){
+                speedX = speedX - ovrSpeed
+            }if(pressD){
+                speedX = speedX - ovrSpeed
             }
+
+
+
+
 
 
         }
-        document.addEventListener("keydown", keyPress)
-        function keyPress(e) {
-            if (e.key === "d") {
-                kirbProg = kirbProg + 25
-                dancin.style.left = Math.round(kirbProg) + px
-            } if (e.key === "a") {
-                kirbProg = kirbProg + 25
-                .style.right = Math.round(kirbProg) +px
+        function draw() {
+            ctx.clearRect(0, 0, 2000, 2000)
+            ctx.drawImage(img, sx[spriteIndex], sy[spriteIndex], 73, 73, 100, 100, 100, 100)
+            spriteIndex = spriteIndex + 1
+            if (spriteIndex > 3) {
+                spriteIndex = 0
             }
 
+        document.addEventListener("keydown", keyPress)
+        function keyPress(e) {
+            if (e.key === "w") {
+                pressW = true
+            } if (e.key === "a") {
+                pressA = true
+            } if (e.key === "s") {
+                pressS === true
+            } if (e.key === "d") {
+                pressD === true
+            }
+        }
+        document.addEventListener("keyup", keyPresss)
+        function keyPresss(e) {
+            if (e.key === "w") {
+                pressW = false
+            } if (e.key === "a") {
+                pressA = false
+            } if (e.key === "s") {
+                pressS === false
+            } if (e.key === "d") {
+                pressD === false
+            }
 
         }
     }
