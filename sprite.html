@@ -21,8 +21,8 @@
     var ctx = canvas.getContext("2d")
     var sx = [25, 90, 155, 90]
     var sy = [400, 400, 400, 400]
-    var posX = 100
-    var posY = 100
+    var posX = 75
+    var posY = 75
     var speedX = 0
     var speedY = 0
     var ovrSpeed = 1.5
@@ -33,63 +33,75 @@
     var spriteIndex = 0
     var kirbProg = 0
     var charCords = {
-        walkX: [25, 90, 155, 90],
-        walkY: [400, 400, 400, 400],
+        downX: [25, 90, 155, 90],
+        downY: [400, 400, 400, 400],
+        upX: [25,90,155,90],
+        upY: [675,675,675,675],
+        rightX: [25, 90, 155, 90],
+        rightY:[580,580,580,580],
+        leftX:[25, 90, 155, 90],
+        leftY:[495,495,495,495], 
     }
     var img = document.getElementById("dancin")
     window.onload = function () {
         setInterval(draw, 150)
-        setInterval(movement ,0,5)
-     }
-        function movement(){
-            if(pressW){
-                speedY = speedY - ovrSpeed
-            }if(pressS){
-                speedY = speedY + ovrSpeed
-            }if(pressA){
-                speedX = speedX - ovrSpeed
-            }if(pressD){
-                speedX = speedX - ovrSpeed
-            }
-
-
-
-
-
-
+        setInterval(movement, 0.5)
+    }
+    function movement() {
+        speedX = 0
+        speedY = 0
+        if (pressW) {
+            speedY = speedY - ovrSpeedawd
         }
-        function draw() {
-            ctx.clearRect(0, 0, 2000, 2000)
-            ctx.drawImage(img, sx[spriteIndex], sy[spriteIndex], 73, 73, 100, 100, 100, 100)
+        if (pressS) {
+            speedY = speedY + ovrSpeed
+        }
+        if (pressA) {
+            speedX = speedX - ovrSpeed
+        }
+        if (pressD) {
+            speedX = speedX + ovrSpeed
+        }
+        posX = posX + speedX
+        posY = posY + speedY
+        ctx.clearRect(0, 0, 2000, 2000)
+        ctx.drawImage(img, charCords.downX, charCords.downY, 73, 73, posX, posY, 73, 73)
+
+    }
+    function draw() {
+        if (speedX !== 0 || speedY !== 0) {
             spriteIndex = spriteIndex + 1
             if (spriteIndex > 3) {
                 spriteIndex = 0
             }
-
-        document.addEventListener("keydown", keyPress)
-        function keyPress(e) {
-            if (e.key === "w") {
-                pressW = true
-            } if (e.key === "a") {
-                pressA = true
-            } if (e.key === "s") {
-                pressS === true
-            } if (e.key === "d") {
-                pressD === true
-            }
+        } else {
+            spriteIndex = 1
         }
-        document.addEventListener("keyup", keyPresss)
-        function keyPresss(e) {
-            if (e.key === "w") {
-                pressW = false
-            } if (e.key === "a") {
-                pressA = false
-            } if (e.key === "s") {
-                pressS === false
-            } if (e.key === "d") {
-                pressD === false
-            }
+    }
 
+    document.addEventListener("keydown", keyPress)
+    function keyPress(e) {
+        if (e.key === "w") {
+            pressW = true
+        } if (e.key === "a") {
+            pressA = true
+        } if (e.key === "s") {
+            pressS = true
+        } if (e.key === "d") {
+            pressD = true
         }
+    }
+    document.addEventListener("keyup", keyPresss)
+    function keyPresss(e) {
+        if (e.key === "w") {
+            pressW = false
+        } if (e.key === "a") {
+            pressA = false
+        } if (e.key === "s") {
+            pressS = false
+        } if (e.key === "d") {
+            pressD = false
+        }
+
     }
 </script>
