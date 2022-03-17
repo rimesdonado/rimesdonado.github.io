@@ -6,6 +6,12 @@
         #dancin {
             display: none;
         }
+        #canvas{
+            position: absolute;
+            top: 0px ;
+            left: 0px;
+           
+        }
     </style>
 </head>
 
@@ -32,6 +38,9 @@
     var pressD = false
     var spriteIndex = 0
     var kirbProg = 0
+    canvas.width = window.innerWidth - 5
+    canvas.height = window.innerHeight - 5
+    
     var charCords = {
         downX: [25, 90, 155, 90],
         downY: [400, 400, 400, 400],
@@ -51,21 +60,37 @@
         speedX = 0
         speedY = 0
         if (pressW) {
-            speedY = speedY - ovrSpeedawd
+            speedY = speedY - ovrSpeed;
+            if(pressS === false){
+                sx = charCords.upX
+                sy = charCords.upY
+            }
         }
         if (pressS) {
-            speedY = speedY + ovrSpeed
+            speedY = speedY + ovrSpeed;
+            if(pressW === false){
+                sx = charCords.downX
+                sy = charCords.downY
+            }
         }
         if (pressA) {
-            speedX = speedX - ovrSpeed
+            speedX = speedX - ovrSpeed;
+            if(pressD === false){
+                sx = charCords.leftX
+                sy = charCords.leftY
+            }
         }
         if (pressD) {
-            speedX = speedX + ovrSpeed
+            speedX = speedX + ovrSpeed;
+            if(pressA === false){
+                sx = charCords.rightX
+                sy = charCords.rightY
+            }
         }
         posX = posX + speedX
         posY = posY + speedY
         ctx.clearRect(0, 0, 2000, 2000)
-        ctx.drawImage(img, charCords.downX, charCords.downY, 73, 73, posX, posY, 73, 73)
+        ctx.drawImage(img, sx[spriteIndex], sy[spriteIndex], 73, 73, posX, posY, 73, 73)
 
     }
     function draw() {
